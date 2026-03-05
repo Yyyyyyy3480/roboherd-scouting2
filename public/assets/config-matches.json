@@ -6,351 +6,109 @@
       "name": "Setup",
       "widgets": [
         {
-         "name": "Starting Position",
+          "name": "Starting Position",
           "type": "dropdown",
           "options": [
+            "Left",
             "Center",
-            "Proccesor Side",
-            "Barge Side"
+            "Right"
           ]
-        }
-      ]
-    },
-    {
-      "name": "Autonomous",
-      "widgets": [
-        {
-          "name": "Left Starting Zone",
-          "type": "checkbox",
-          "col":4
         },
         {
-          "type": "spacer",
-          "height": 20
-        },
-        {
-          "name": "Remove Algae",
-          "type": "heading",
-          "prefix": "Auto",
-          "col": 2
-        },
-        {
-          "name": "L2.5",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "row": 3,
-          "col": 3
-        },
-        {
-          "name": "L3.5",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "row": 3,
-          "col": 5
-        },
-        {
-          "name": "Scoring Algae",
-          "type": "heading",
-          "col":2
-        },
-        {
-          "name": "Net",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "col": 3,
-          "row": 4
-        },
-        {
-          "name": "Proccesor",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "col": 5,
-          "row" :4
-        },
-        {
-          "name": "Scoring Coral",
-          "type": "heading",
-          "col": 2
-        },
-        {
-          "name": "Trough Corals",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "row": 5,
-          "col": 3
-        },
-        {
-          "name": "L2 Corals",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "row": 5,
-          "col": 5
-        },
-        {
-          "name": "L3 Corals",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "col": 3
-        },
-        {
-          "name": "L4 Corals",
-          "type": "spinbox",
-          "prefix": "Auto",
-          "col": 5,
-          "row": 6
-        },
-        {
-          "name": "Pick-up Locations",
-          "type": "heading",
-          "col": 4
-        },
-        {
-          "name": "Algae",
-          "type": "heading",
-          "col": 2
-        },
-        {
-          "name": "A1",
-          "type": "checkbox",
-          "col": 3,
-          "row": 8
-        },
-        {
-          "name": "A2",
-          "type": "checkbox",
-          "col": 4,
-          "row": 8
-        },
-        {
-          "name": "A3",
-          "type": "checkbox",
-          "col": 6,
-          "row": 8
-        },
-        {
-          "name": "Coral",
-          "type": "heading",
-          "col": 2
-        },
-        {
-          "name": "C1",
-          "type": "checkbox",
-          "col": 3,
-          "row": 9
-        },
-        {
-          "name": "C2",
-          "type": "checkbox",
-          "col": 4,
-          "row": 9
-        },
-        {
-          "name": "C3",
-          "type": "checkbox",
-          "col": 6,
-          "row": 9
-        },
-        {
-          "name": "C Station",
-          "type": "checkbox",
-          "col": 5,
-          "row": 11
+          "name": "Preloaded Game Piece",
+          "type": "checkbox"
         }
       ]
     },
 
+    {
+      "name": "Autonomous",
+      "widgets": [
+        {
+          "name": "Mobility",
+          "type": "checkbox"
+        },
+        {
+          "name": "Auto Scored",
+          "type": "spinbox",
+          "prefix": "Auto"
+        },
+        {
+          "name": "Auto Missed",
+          "type": "spinbox",
+          "prefix": "Auto"
+        }
+      ]
+    },
 
     {
       "name": "Teleop",
       "widgets": [
         {
-          "name": "Picked Up From",
-          "type": "heading",
-          "align": "center",
-          "col": 3
+          "name": "Pieces Picked Up",
+          "type": "spinbox"
         },
         {
-          "name": "Algae",
-          "type": "heading",
-          "align": "center",
-          "col": 3,
-          "row":2
+          "name": "Pieces Scored",
+          "type": "spinbox"
         },
         {
-          "name": "Ground",
-          "type": "spinbox",
-          "col": 1,
-          "row": 3
+          "name": "Missed Shots",
+          "type": "spinbox"
         },
         {
-          "name": "Reef L2.5",
-          "type": "spinbox",
-          "row": 3,
-          "col": 3
+          "name": "Played Defense",
+          "type": "checkbox"
         },
         {
-          "name": "Reef L3.5",
-          "type": "spinbox",
-          "row": 4,
-          "col": 2
-        },
-        {
-          "name": "Coral",
-          "type": "heading",
-          "row": 5,
-          "col": 3,
-          "align": "center"
-        },
-        {
-          "name": "Ground",
-          "type": "spinbox",
-          "col": 1,
-          "row": 6
-        },
-        {
-          "name": "Coral Station",
-          "type": "spinbox",
-          "row": 6,
-          "col": 3
-        },
-        {
-          "name": "Trough",
-          "type": "spinbox",
-          "row": 7,
-          "col":2
-        },
-    
-        {
-          "name": "Scoring",
-          "type": "heading",
-          "align": "center",
-          "col": 3
-    
-        },
-
-        {
-          "name": "Algae",
-          "type": "heading",
-          "row": 9,
-          "col": 1
-
-        },
-        {
-          "name": "Net",
-          "type": "spinbox",
-          "col": 2,
-          "row": 9
-        },
-        {
-          "name": "Proccesor",
-          "type": "spinbox",
-          "row": 9,
-          "col": 4
-
-        },
-
-        {
-          "name": "Coral",
-          "type": "heading",
-          "col": 1,
-          "row": 10
-        },
-        {
-          "name": "Coral Trough",
-          "type": "spinbox",
-          "col": 2,
-          "row": 10
-        },
-        {
-          "name": "Coral L2",
-          "type": "spinbox",
-          "row": 10,
-          "col": 4
-        },
-        {
-          "name": "Coral L3",
-          "type": "spinbox",
-          "col": 2,
-          "row": 11
-
-        },
-        {
-          "name": "Coral L4",
-          "type": "spinbox",
-          "row": 11,
-          "col": 4
-        },
-        {
-          "name":"My nono square",
-          "type": "spacer",
-          "height": 15
-        },
-        {
-          "name": "Assists",
-          "type": "checkbox",
-          "col": 2,
-          "align": "center"
-        },
-        {
-          "name": "Rescore",
-          "type": "spinbox",
-          "col":2,
-          "align": "center"
-        },
-        {
-          "name": "Dropped Corals",
-          "type": "spinbox",
-          "col": 2,
-          "align": "center"
+          "name": "Defense Effectiveness",
+          "type": "dropdown",
+          "options": [
+            "None",
+            "Low",
+            "Medium",
+            "High"
+          ]
         }
       ]
     },
+
     {
       "name": "Endgame",
       "widgets": [
         {
-          "name": "End Location",
+          "name": "Endgame Result",
           "type": "radio",
           "options": [
-            "Deep",
-            "Shallow",
-            "Parked",
+            "Climb",
+            "Park",
+            "Attempted",
             "None"
           ],
           "default": 3
         },
         {
-          "name": "Failed Climb",
+          "name": "Robot Disabled",
           "type": "checkbox"
         },
         {
-          "name": "Robot Position",
-          "type": "radio",
+          "name": "Driver Skill",
+          "type": "dropdown",
           "options": [
-            "1",
-            "2",
-            "3",
-            "None"
-          ],
-          "default": 3
+            "Poor",
+            "Average",
+            "Good",
+            "Excellent"
+          ]
         },
         {
-          "name": "Barge RP",
-          "type": "checkbox"
-        },
-
-        {
-          "name": "Mechanical Failures",
+          "name": "Mechanical Issues",
           "type": "text"
         },
         {
-        "name": "Scouter Name",
-          "type": "text",
-          "validation": {
-            "comparison": "greater",
-            "value": 0
+          "name": "Scouter Name",
+          "type": "text"
         }
-      }
       ]
     }
   ]
