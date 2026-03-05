@@ -1,7 +1,9 @@
 {
   "heading": "Rebuilt-2026",
   "logo": "logo.png",
+
   "pages": [
+
     {
       "name": "Setup",
       "widgets": [
@@ -15,7 +17,7 @@
           ]
         },
         {
-          "name": "Preloaded Game Piece",
+          "name": "Preloaded Fuel",
           "type": "checkbox"
         }
       ]
@@ -24,17 +26,20 @@
     {
       "name": "Autonomous",
       "widgets": [
+
         {
           "name": "Mobility",
           "type": "checkbox"
         },
+
         {
-          "name": "Auto Scored",
+          "name": "Fuel Scored",
           "type": "spinbox",
           "prefix": "Auto"
         },
+
         {
-          "name": "Auto Missed",
+          "name": "Fuel Missed",
           "type": "spinbox",
           "prefix": "Auto"
         }
@@ -44,30 +49,35 @@
     {
       "name": "Teleop",
       "widgets": [
+
         {
-          "name": "Pieces Picked Up",
+          "name": "Fuel Scored",
           "type": "spinbox"
         },
+
         {
-          "name": "Pieces Scored",
+          "name": "Fuel Missed",
           "type": "spinbox"
         },
+
         {
-          "name": "Missed Shots",
+          "name": "Fuel Picked Up",
           "type": "spinbox"
         },
+
         {
           "name": "Played Defense",
           "type": "checkbox"
         },
+
         {
-          "name": "Defense Effectiveness",
-          "type": "dropdown",
+          "name": "Driver Skill",
+          "type": "radio",
           "options": [
-            "None",
-            "Low",
-            "Medium",
-            "High"
+            "Poor",
+            "Average",
+            "Good",
+            "Elite"
           ]
         }
       ]
@@ -76,40 +86,41 @@
     {
       "name": "Endgame",
       "widgets": [
+
         {
-          "name": "Endgame Result",
+          "name": "Tower Climb",
           "type": "radio",
           "options": [
-            "Climb",
-            "Park",
-            "Attempted",
+            "High Climb",
+            "Mid Climb",
+            "Low Climb",
+            "Parked",
             "None"
           ],
-          "default": 3
+          "default": 4
         },
+
+        {
+          "name": "Failed Climb",
+          "type": "checkbox"
+        },
+
         {
           "name": "Robot Disabled",
           "type": "checkbox"
         },
-        {
-          "name": "Driver Skill",
-          "type": "dropdown",
-          "options": [
-            "Poor",
-            "Average",
-            "Good",
-            "Excellent"
-          ]
-        },
+
         {
           "name": "Mechanical Issues",
           "type": "text"
         },
+
         {
           "name": "Scouter Name",
           "type": "text"
         }
       ]
     }
+
   ]
 }
