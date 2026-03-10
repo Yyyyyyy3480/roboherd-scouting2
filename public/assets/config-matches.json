@@ -53,10 +53,6 @@
           "type": "spinbox"
         },
         {
-          "name": "Fuel Picked Up",
-          "type": "spinbox"
-        },
-        {
           "name": "Played Defense",
           "type": "checkbox"
         },
