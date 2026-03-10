@@ -26,22 +26,17 @@
     {
       "name": "Autonomous",
       "widgets": [
-
         {
           "name": "Mobility",
           "type": "checkbox"
         },
-
         {
-          "name": "Fuel Scored",
-          "type": "spinbox",
-          "prefix": "Auto"
+          "name": "Auto Fuel Scored",
+          "type": "spinbox"
         },
-
         {
-          "name": "Fuel Missed",
-          "type": "spinbox",
-          "prefix": "Auto"
+          "name": "Auto Fuel Missed",
+          "type": "spinbox"
         }
       ]
     },
@@ -49,27 +44,22 @@
     {
       "name": "Teleop",
       "widgets": [
-
         {
-          "name": "Fuel Scored",
+          "name": "Teleop Fuel Scored",
           "type": "spinbox"
         },
-
         {
-          "name": "Fuel Missed",
+          "name": "Teleop Fuel Missed",
           "type": "spinbox"
         },
-
         {
           "name": "Fuel Picked Up",
           "type": "spinbox"
         },
-
         {
           "name": "Played Defense",
           "type": "checkbox"
         },
-
         {
           "name": "Driver Skill",
           "type": "radio",
@@ -86,7 +76,6 @@
     {
       "name": "Endgame",
       "widgets": [
-
         {
           "name": "Tower Climb",
           "type": "radio",
@@ -99,22 +88,18 @@
           ],
           "default": 4
         },
-
         {
           "name": "Failed Climb",
           "type": "checkbox"
         },
-
         {
           "name": "Robot Disabled",
           "type": "checkbox"
         },
-
         {
           "name": "Mechanical Issues",
           "type": "text"
         },
-
         {
           "name": "Scouter Name",
           "type": "text"
@@ -125,25 +110,18 @@
     {
       "name": "Score",
       "widgets": [
-
         {
-          "name": "Fuel Total",
-          "type": "calc",
-          "expression": "Auto_Fuel_Scored + Fuel_Scored"
+          "name": "Total Fuel Scored",
+          "type": "spinbox"
         },
-
         {
-          "name": "Climb Points",
-          "type": "calc",
-          "expression": "if(Tower_Climb == 0, 50, if(Tower_Climb == 1, 25, if(Tower_Climb == 2, 15, if(Tower_Climb == 3, 5, 0))))"
+          "name": "Hang Points",
+          "type": "spinbox"
         },
-
         {
           "name": "Total Match Score",
-          "type": "calc",
-          "expression": "Fuel_Total + Climb_Points"
+          "type": "spinbox"
         }
-
       ]
     }
 
