@@ -1,3 +1,3 @@
-matches
-pits
-qualitative
+Matches
+Pits
+Qualitative
