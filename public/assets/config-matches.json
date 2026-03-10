@@ -120,7 +120,33 @@
           "type": "text"
         }
       ]
+    },
+
+    {
+      "name": "Score",
+      "widgets": [
+
+        {
+          "name": "Fuel Total",
+          "type": "calc",
+          "expression": "Auto_Fuel_Scored + Fuel_Scored"
+        },
+
+        {
+          "name": "Climb Points",
+          "type": "calc",
+          "expression": "if(Tower_Climb == 0, 50, if(Tower_Climb == 1, 25, if(Tower_Climb == 2, 15, if(Tower_Climb == 3, 5, 0))))"
+        },
+
+        {
+          "name": "Total Match Score",
+          "type": "calc",
+          "expression": "Fuel_Total + Climb_Points"
+        }
+
+      ]
     }
 
   ]
+}
 }
