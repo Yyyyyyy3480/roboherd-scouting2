@@ -79,10 +79,9 @@
             "High Climb",
             "Mid Climb",
             "Low Climb",
-            "Parked",
             "None"
           ],
-          "default": 4
+          "default": 3
         },
         {
           "name": "Failed Climb",
@@ -111,15 +110,13 @@
           "type": "spinbox"
         },
         {
-          "name": "Hang Points",
-          "type": "spinbox"
-        },
-        {
           "name": "Total Match Score",
-          "type": "spinbox"
+          "type": "spinbox",
+          "readonly": true
         }
       ]
     }
 
   ]
+}
 }
