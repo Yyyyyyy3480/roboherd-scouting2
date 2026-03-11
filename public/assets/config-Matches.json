@@ -65,6 +65,11 @@
           "default": 3
         },
         {
+          "name": "Hangar Points",
+          "type": "spinbox",
+          "default": 0
+        },
+        {
           "name": "Failed Climb",
           "type": "checkbox"
         },
@@ -95,7 +100,7 @@
           "name": "Total Match Score",
           "type": "spinbox",
           "readonly": true,
-          "calculation": "Score['Total Fuel Scored'] + (Endgame['Tower Climb'] == 'High Climb' ? 30 : Endgame['Tower Climb'] == 'Mid Climb' ? 20 : Endgame['Tower Climb'] == 'Low Climb' ? 10 : 0)"
+          "calculation": "Score['Total Fuel Scored'] + Endgame['Hangar Points'] + (Setup['Preloaded Fuel'] ? 5 : 0) + (Endgame['Tower Climb'] == 'High Climb' ? 30 : Endgame['Tower Climb'] == 'Mid Climb' ? 20 : Endgame['Tower Climb'] == 'Low Climb' ? 10 : 0)"
         }
       ]
     }
