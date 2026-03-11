@@ -86,19 +86,6 @@
           "type": "text"
         }
       ]
-    },
-    {
-      "name": "Score",
-      "widgets": [
-        {
-          "name": "Total Fuel Scored",
-          "type": "spinbox"
-        },
-        {
-          "name": "Total Match Score",
-          "type": "spinbox"
-        }
-      ]
     }
   ]
 }
