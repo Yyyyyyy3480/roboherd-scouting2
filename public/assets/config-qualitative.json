@@ -1,146 +1,123 @@
 {
-  "heading": "Reefscape - 2025 (Qualitative Scouting)",
+  "heading": "Rebuilt-2026",
   "logo": "logo.png",
+
   "pages": [
+
     {
-      "name": "Qualitative Scouting",
+      "name": "Setup",
       "widgets": [
         {
-          "name": "Speed While Moving",
+          "name": "Starting Position",
           "type": "dropdown",
           "options": [
-            "1 (Slowest)",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6 (Fastest)"
+            "Left",
+            "Center",
+            "Right"
           ]
         },
         {
-          "name": "Expansion Limits",
-          "type": "spinbox",
-          "row": 1,
-          "col": 3
-        },
-        {
-          "name": "Handling",
-          "type": "dropdown",
-          "options": [
-            "1 (Worst)",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6 (Best)"
-          ]
-        },
-        {
-          "name": "Pinning",
-          "type": "spinbox",
-          "row": 2,
-          "col": 3
-        },
-        {
-          "name": "Balance",
-          "type": "dropdown",
-          "options": [
-            "1 (Stable)",
-            "0 (Tipping)",
-            "-1 (Fell over)"
-          ]
-        },
-        {
-          "name": "Illegal Contact",
-          "type": "spinbox",
-          "row": 3,
-          "col": 3
-        },
-        {
-          "name": "Force",
-          "type": "dropdown",
-          "options": [
-            "1 (Lowest)",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6 (Highest)"
-          ]
-        },
-        {
-          "name": "Safe Zone Contact",
-          "type": "spinbox",
-          "row": 4,
-          "col": 3
-        },
-        {
-          "name": "Broken Down",
-          "type": "dropdown",
-          "options": [
-            "1 (Did not break)",
-            "0 (Component break)",
-            "-1 (Dead)"
-          ]
-        },
-        {
-          "type": "spacer",
-          "height": 20
-        },
-        {
-          "name": "Pin Time",
-          "type": "stopwatch"
-        },
-        {
-          "name": "Scoring Patterns",
-          "type": "positions",
-          "file": "field.png",
-          "allowMultiple": true,
-          "colspan": 3
-        },
-        {
-          "name": "Common Scoring Locations",
-          "type": "multicheckbox",
-          "options": [
-            "trough",
-            "L2",
-            "L3",
-            "L4",
-            "Proccesor",
-            "Barge"
-          ]
-        },
-        {
-          "name": "Comments",
-          "type": "textarea"
+          "name": "Preloaded Fuel",
+          "type": "checkbox"
         }
       ]
     },
+
     {
-      "name": "Human Player Judgement",
+      "name": "Autonomous",
       "widgets": [
         {
-          "name": "How many thrown in the net",
+          "name": "Mobility",
+          "type": "checkbox"
+        },
+        {
+          "name": "Auto Fuel Scored",
           "type": "spinbox"
         },
         {
-          "name": "How Many thrown to ground",
+          "name": "Auto Fuel Missed",
+          "type": "spinbox"
+        }
+      ]
+    },
+
+    {
+      "name": "Teleop",
+      "widgets": [
+        {
+          "name": "Teleop Fuel Scored",
           "type": "spinbox"
         },
         {
-          "name": "How many throws missed",
+          "name": "Teleop Fuel Missed",
           "type": "spinbox"
         },
         {
-          "name": "Get the human player's autograph here!",
-          "type": "heading"
+          "name": "Played Defense",
+          "type": "checkbox"
         },
         {
-          "name": "Get their autograph here",
-          "type": "label",
-          "file": "demo.png"
+          "name": "Driver Skill",
+          "type": "radio",
+          "options": [
+            "Poor",
+            "Average",
+            "Good",
+            "Elite"
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "Endgame",
+      "widgets": [
+        {
+          "name": "Tower Climb",
+          "type": "radio",
+          "options": [
+            "High Climb",
+            "Mid Climb",
+            "Low Climb",
+            "None"
+          ],
+          "default": 3
+        },
+        {
+          "name": "Failed Climb",
+          "type": "checkbox"
+        },
+        {
+          "name": "Robot Disabled",
+          "type": "checkbox"
+        },
+        {
+          "name": "Mechanical Issues",
+          "type": "text"
+        },
+        {
+          "name": "Scouter Name",
+          "type": "text"
+        }
+      ]
+    },
+
+    {
+      "name": "Score",
+      "widgets": [
+        {
+          "name": "Total Fuel Scored",
+          "type": "spinbox"
+        },
+        {
+          "name": "Total Match Score",
+          "type": "spinbox",
+          "readonly": true
         }
       ]
     }
+
   ]
+}
+
 }
