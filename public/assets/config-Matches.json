@@ -30,12 +30,6 @@
         {
           "name": "Auto Fuel Missed",
           "type": "spinbox"
-        },
-        {
-          "name": "Auto Fuel Accuracy (%)",
-          "type": "spinbox",
-          "readonly": true,
-          "calculation": "(Autonomous['Auto Fuel Scored'] + Autonomous['Auto Fuel Missed'] > 0) ? (Autonomous['Auto Fuel Scored'] / (Autonomous['Auto Fuel Scored'] + Autonomous['Auto Fuel Missed']) * 100) : 0"
         }
       ]
     },
@@ -49,12 +43,6 @@
         {
           "name": "Teleop Fuel Missed",
           "type": "spinbox"
-        },
-        {
-          "name": "Teleop Fuel Accuracy (%)",
-          "type": "spinbox",
-          "readonly": true,
-          "calculation": "(Teleop['Teleop Fuel Scored'] + Teleop['Teleop Fuel Missed'] > 0) ? (Teleop['Teleop Fuel Scored'] / (Teleop['Teleop Fuel Scored'] + Teleop['Teleop Fuel Missed']) * 100) : 0"
         },
         {
           "name": "Played Defense",
@@ -104,15 +92,11 @@
       "widgets": [
         {
           "name": "Total Fuel Scored",
-          "type": "spinbox",
-          "readonly": true,
-          "calculation": "Autonomous['Auto Fuel Scored'] + Teleop['Teleop Fuel Scored'] + (Setup['Preloaded Fuel'] ? 5 : 0)"
+          "type": "spinbox"
         },
         {
           "name": "Total Match Score",
-          "type": "spinbox",
-          "readonly": true,
-          "calculation": "Autonomous['Auto Fuel Scored'] + Teleop['Teleop Fuel Scored'] + (Setup['Preloaded Fuel'] ? 5 : 0) + Endgame['Hangar Points'] + (Endgame['Tower Climb'] == 'High Climb' ? 30 : Endgame['Tower Climb'] == 'Mid Climb' ? 20 : Endgame['Tower Climb'] == 'Low Climb' ? 10 : 0)"
+          "type": "spinbox"
         }
       ]
     }
