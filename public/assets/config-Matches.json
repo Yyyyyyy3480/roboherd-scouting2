@@ -1,20 +1,14 @@
 {
   "heading": "Rebuilt-2026",
   "logo": "logo.png",
-
   "pages": [
-
     {
       "name": "Setup",
       "widgets": [
         {
           "name": "Starting Position",
           "type": "dropdown",
-          "options": [
-            "Left",
-            "Center",
-            "Right"
-          ]
+          "options": ["Left", "Center", "Right"]
         },
         {
           "name": "Preloaded Fuel",
@@ -22,7 +16,6 @@
         }
       ]
     },
-
     {
       "name": "Autonomous",
       "widgets": [
@@ -40,7 +33,6 @@
         }
       ]
     },
-
     {
       "name": "Teleop",
       "widgets": [
@@ -59,28 +51,17 @@
         {
           "name": "Driver Skill",
           "type": "radio",
-          "options": [
-            "Poor",
-            "Average",
-            "Good",
-            "Elite"
-          ]
+          "options": ["Poor", "Average", "Good", "Elite"]
         }
       ]
     },
-
     {
       "name": "Endgame",
       "widgets": [
         {
           "name": "Tower Climb",
           "type": "radio",
-          "options": [
-            "High Climb",
-            "Mid Climb",
-            "Low Climb",
-            "None"
-          ],
+          "options": ["High Climb", "Mid Climb", "Low Climb", "None"],
           "default": 3
         },
         {
@@ -101,21 +82,23 @@
         }
       ]
     },
-
     {
       "name": "Score",
       "widgets": [
         {
           "name": "Total Fuel Scored",
-          "type": "spinbox"
+          "type": "spinbox",
+          "readonly": true,
+          "calculation": "Autonomous['Auto Fuel Scored'] + Teleop['Teleop Fuel Scored']"
         },
         {
           "name": "Total Match Score",
           "type": "spinbox",
-          "readonly": true
+          "readonly": true,
+          "calculation": "Score['Total Fuel Scored'] + (Endgame['Tower Climb'] == 'High Climb' ? 30 : Endgame['Tower Climb'] == 'Mid Climb' ? 20 : Endgame['Tower Climb'] == 'Low Climb' ? 10 : 0)"
         }
       ]
     }
-
   ]
+}
 }
