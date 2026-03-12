@@ -1,18 +1,18 @@
-<script setup>
-import { ref, onMounted } from "vue"
-import { generatePicklist } from "@/analytics/picklist"
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+// ✅ Import must include the .js extension for Vite build
+import { generatePicklist } from "@/analytics/picklist.js";
 
-// reactive array to hold picklist
-const picklist = ref([])
+const picklist = ref([]);
 
 // function to load picklist from scouting data
 function loadPicklist() {
-  const scoutingData = JSON.parse(localStorage.getItem("matchData")) || []
-  picklist.value = generatePicklist(scoutingData)
+  const scoutingData = JSON.parse(localStorage.getItem("matchData")) || [];
+  picklist.value = generatePicklist(scoutingData);
 }
 
 // run once when component mounts
-onMounted(loadPicklist)
+onMounted(loadPicklist);
 </script>
 
 <template>
