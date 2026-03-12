@@ -6,7 +6,7 @@ import TPSExporterView from "@/views/TPSExporterView.vue";
 import PicklistView from "@/views/PicklistView.vue";
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory("/"), // ✅ fixed to avoid build warning
   routes: [
     {
       path: "/",
