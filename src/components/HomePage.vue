@@ -1,45 +1,64 @@
-<template>
-  <h1>Roboherd Scouting</h1>
-  <h2>Form Selection</h2>
-  <ul v-if="list.length > 0" class="link-list">
-    <li v-for="[i, name] of list.entries()" :key="i">
-      <RouterLink :to="{ name: 'form', query: { name } }">{{ name }}</RouterLink>
-    </li>
-  </ul>
-  <p v-else>No configurations specified.</p>
-  <h2>Tools</h2>
-  <ul class="link-list">
-    <li>
-      <RouterLink :to="{ name: 'inspector' }">Data Inspector</RouterLink>
-    </li>
-    <li>
-      <RouterLink :to="{ name: 'tps-exporter' }">TPS Exporter</RouterLink>
-    </li>
-  </ul>
-  <p style="margin-top: 50px">Version: {{ version }}</p>
-</template>
-
 <script setup lang="ts">
-import { FetchError } from "@/common/shared";
+import { ref } from "vue";
 
-const version = APP_VERSION;
-
-// Fetch configurations list
-const fetchResult = await fetch(`${import.meta.env.BASE_URL}assets/configurations.txt`);
-
-if (!fetchResult.ok) throw new FetchError("Configuration list", fetchResult);
-
-// Get text data, then convert to array
-const textData = await fetchResult.text();
-const list = $ref(textData.split("\n").map(value => value.trim()).filter(value => value.length > 0));
+const eventKey = ref("2026miket");  // example default
+const scoutName = ref("");
 </script>
 
-<style lang="postcss">
-.link-list {
-  margin: 0;
+<template>
+  <div class="home-page" style="max-width: 600px; margin: 0 auto; padding: 20px;">
+    <h1>Roboherd Scouting</h1>
 
-  li {
-    margin: 6px 0;
-  }
+    <!-- Event and Scout Inputs -->
+    <div style="margin-bottom: 20px;">
+      <label>
+        Event Key:
+        <input v-model="eventKey" type="text" placeholder="Enter event key" />
+      </label>
+      <br /><br />
+      <label>
+        Scout Name:
+        <input v-model="scoutName" type="text" placeholder="Enter your name" />
+      </label>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="button-group" style="display: flex; flex-direction: column; gap: 10px;">
+      <router-link to="/form"><button>Open Scouting Form</button></router-link>
+      <router-link to="/inspector"><button>Inspector View</button></router-link>
+      <router-link to="/tps-exporter"><button>TPS Exporter</button></router-link>
+      <router-link to="/picklist"><button>Alliance Picklist</button></router-link>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+h1 {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 30px;
+}
+
+input[type="text"] {
+  margin-left: 10px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+
+button {
+  padding: 10px;
+  background-color: #292929;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #444;
 }
 </style>
