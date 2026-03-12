@@ -4,7 +4,9 @@
       <template #default>
         <HomePage />
       </template>
-      <template #fallback>Loading...</template>
+      <template #fallback>
+        Loading...
+      </template>
     </Suspense>
   </div>
 </template>
@@ -17,5 +19,6 @@ import HomePage from "@/components/HomePage.vue";
 #home-container {
   display: grid;
   justify-content: center;
+  padding: 20px;
 }
 </style>
