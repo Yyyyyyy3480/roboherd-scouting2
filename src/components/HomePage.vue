@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const eventKey = ref("2026miket");  // example default
-const scoutName = ref("");
+const eventKey = ref("2026miket")
+const scoutName = ref("")
 </script>
 
 <template>
@@ -24,8 +24,9 @@ const scoutName = ref("");
 
     <!-- Navigation Buttons -->
     <div class="button-group" style="display: flex; flex-direction: column; gap: 10px;">
+      
       <router-link
-        :to="`/form?config=loadconfig-matches.json&event=${eventKey}&scout=${scoutName}`"
+        :to="`/form?config=/assets/config-Matches.json&event=${eventKey}&scout=${scoutName}`"
       >
         <button>Open Scouting Form</button>
       </router-link>
@@ -41,6 +42,7 @@ const scoutName = ref("");
       <router-link to="/picklist">
         <button>Alliance Picklist</button>
       </router-link>
+
     </div>
   </div>
 </template>
