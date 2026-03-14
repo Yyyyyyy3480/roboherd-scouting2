@@ -24,10 +24,23 @@ const scoutName = ref("");
 
     <!-- Navigation Buttons -->
     <div class="button-group" style="display: flex; flex-direction: column; gap: 10px;">
-      <router-link to="/form"><button>Open Scouting Form</button></router-link>
-      <router-link to="/inspector"><button>Inspector View</button></router-link>
-      <router-link to="/tps-exporter"><button>TPS Exporter</button></router-link>
-      <router-link to="/picklist"><button>Alliance Picklist</button></router-link>
+      <router-link
+        :to="`/form?config=loadconfig-matches.json&event=${eventKey}&scout=${scoutName}`"
+      >
+        <button>Open Scouting Form</button>
+      </router-link>
+
+      <router-link to="/inspector">
+        <button>Inspector View</button>
+      </router-link>
+
+      <router-link to="/tps-exporter">
+        <button>TPS Exporter</button>
+      </router-link>
+
+      <router-link to="/picklist">
+        <button>Alliance Picklist</button>
+      </router-link>
     </div>
   </div>
 </template>
