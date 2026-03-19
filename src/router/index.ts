@@ -1,39 +1,19 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import FormView from "@/views/FormView.vue";
 import HomeView from "@/views/HomeView.vue";
+import FormView from "@/views/FormView.vue";
 import InspectorView from "@/views/InspectorView.vue";
 import TPSExporterView from "@/views/TPSExporterView.vue";
 import PicklistView from "@/views/PicklistView.vue";
 
 const router = createRouter({
-  history: createWebHashHistory("/"), // ✅ fixed to avoid build warning
+  history: createWebHashHistory("/"), // hash mode for GitHub Pages
   routes: [
-    {
-      path: "/",
-      name: "home",
-      component: HomeView
-    },
-    {
-      path: "/form",
-      name: "form",
-      component: FormView
-    },
-    {
-      path: "/inspector",
-      name: "inspector",
-      component: InspectorView
-    },
-    {
-      path: "/tps-exporter",
-      name: "tps-exporter",
-      component: TPSExporterView
-    },
-    {
-      path: "/picklist",
-      name: "picklist",
-      component: PicklistView
-    }
-  ]
+    { path: "/", name: "home", component: HomeView },
+    { path: "/form", name: "form", component: FormView },
+    { path: "/inspector", name: "inspector", component: InspectorView },
+    { path: "/tps-exporter", name: "tps-exporter", component: TPSExporterView },
+    { path: "/picklist", name: "picklist", component: PicklistView },
+  ],
 });
 
 export default router;
