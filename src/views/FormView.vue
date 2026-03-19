@@ -18,7 +18,7 @@ import { useConfigStore } from "@/common/stores";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const configPath = route.query.config?.toString(); // get the path from URL
+const configPath = route.query.config?.toString();
 
 const config = useConfigStore();
 const error = ref("");
@@ -40,10 +40,10 @@ watch(
       config.data = json;    // store JSON in Pinia
       config.name = newPath; // store path name
       error.value = "";
-      console.log("Loaded config:", json);
+      console.log("Config loaded:", json);
     } catch (err) {
-      console.error(err);
-      error.value = "Failed to load configuration";
+      console.error("JSON configuration fetch failed:", err);
+      error.value = "Failed to load configuration (404?)";
       config.data = null;
     }
   },
