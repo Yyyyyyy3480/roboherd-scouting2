@@ -20,7 +20,7 @@ watch(scoutName, (val) => {
   localStorage.setItem("scoutName", val);
 });
 
-// Trimmed values (prevents accidental spaces)
+// Trimmed values
 const trimmedEventKey = computed(() => eventKey.value.trim());
 const trimmedScoutName = computed(() => scoutName.value.trim());
 
@@ -28,6 +28,9 @@ const trimmedScoutName = computed(() => scoutName.value.trim());
 const isFormDisabled = computed(() => {
   return !trimmedEventKey.value || !trimmedScoutName.value;
 });
+
+// Base URL (fixes GitHub Pages path issues)
+const base = import.meta.env.BASE_URL;
 </script>
 
 <template>
@@ -53,7 +56,7 @@ const isFormDisabled = computed(() => {
         :to="{
           path: '/form',
           query: {
-            config: '/assets/config-matches.json',
+            config: `${base}assets/config-matches.json`,
             event: trimmedEventKey,
             scout: trimmedScoutName
           }
