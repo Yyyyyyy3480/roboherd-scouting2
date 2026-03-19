@@ -1,6 +1,6 @@
 <template>
   <div id="form-container">
-    <Suspense v-if="name">
+    <Suspense v-if="configPath">
       <template #default>
         <FormContainer />
       </template>
@@ -15,18 +15,9 @@ import FormContainer from "@/components/FormContainer.vue";
 import { useConfigStore } from "@/common/stores";
 import { useRoute } from "vue-router";
 
-// Set configuration name based on the URL params
-const config = useConfigStore();
-const name = useRoute().query.name?.toString();
-config.name = name ?? "";
-</script>
+const route = useRoute();
+const configPath = route.query.config?.toString();
 
-<style>
-#form-container {
-  display: grid;
-  height: 100vh;
-  gap: 40px;
-  grid-template-rows: 1fr auto;
-  justify-items: center;
-}
-</style>
+const config = useConfigStore();
+config.name = configPath ?? "";
+</script>
