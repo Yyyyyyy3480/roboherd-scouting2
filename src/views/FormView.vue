@@ -18,7 +18,7 @@ import { useConfigStore } from "@/common/stores";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const configPath = route.query.config?.toString();
+const configPath = route.query.config?.toString(); // exact path from URL
 
 const config = useConfigStore();
 const error = ref("");
@@ -43,7 +43,7 @@ watch(
       console.log("Config loaded:", json);
     } catch (err) {
       console.error("JSON configuration fetch failed:", err);
-      error.value = "Failed to load configuration (404?)";
+      error.value = "Failed to load configuration (check filename/path)";
       config.data = null;
     }
   },
