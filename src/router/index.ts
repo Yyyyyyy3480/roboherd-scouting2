@@ -6,7 +6,7 @@ import TPSExporterView from "@/views/TPSExporterView.vue";
 import PicklistView from "@/views/PicklistView.vue";
 
 const router = createRouter({
-  history: createWebHashHistory("/"), // hash mode for GitHub Pages
+  history: createWebHashHistory("/"), // ✅ hash mode for GitHub Pages
   routes: [
     { path: "/", name: "home", component: HomeView },
     { path: "/form", name: "form", component: FormView },
