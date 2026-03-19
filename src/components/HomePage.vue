@@ -17,8 +17,17 @@
 
     <!-- Navigation Buttons -->
     <div class="button-group" style="display: flex; flex-direction: column; gap: 10px;">
+
+      <!-- Open Scouting Form with encoded config URL -->
       <router-link
-        :to="`/form?config=/roboherd-scouting2/assets/config-matches.json&event=${eventKey}&scout=${scoutName}`"
+        :to="{
+          path: '/form',
+          query: {
+            config: encodeURIComponent('/roboherd-scouting2/assets/config-matches.json'),
+            event: eventKey,
+            scout: scoutName
+          }
+        }"
       >
         <button>Open Scouting Form</button>
       </router-link>
@@ -34,6 +43,7 @@
       <router-link to="/picklist">
         <button>Alliance Picklist</button>
       </router-link>
+
     </div>
   </div>
 </template>
@@ -42,7 +52,7 @@
 import { ref } from "vue";
 
 const eventKey = ref("2026miket");
-const scoutName = ref("Scout 1"); // default value to avoid empty button
+const scoutName = ref("Scout 1"); // default to prevent empty name
 </script>
 
 <style scoped>
