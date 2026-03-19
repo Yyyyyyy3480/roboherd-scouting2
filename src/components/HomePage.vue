@@ -18,12 +18,12 @@
     <!-- Navigation Buttons -->
     <div class="button-group" style="display: flex; flex-direction: column; gap: 10px;">
 
-      <!-- Open Scouting Form with encoded config URL -->
+      <!-- Open Scouting Form -->
       <router-link
         :to="{
           path: '/form',
           query: {
-            config: encodeURIComponent('/roboherd-scouting2/assets/config-matches.json'),
+            config: '/roboherd-scouting2/assets/config-matches.json', // ⚡ path stays as-is
             event: eventKey,
             scout: scoutName
           }
@@ -52,7 +52,7 @@
 import { ref } from "vue";
 
 const eventKey = ref("2026miket");
-const scoutName = ref("Scout 1"); // default to prevent empty name
+const scoutName = ref("Scout 1"); // default name
 </script>
 
 <style scoped>
