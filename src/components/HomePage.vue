@@ -17,7 +17,6 @@
 
     <!-- Navigation Buttons -->
     <div class="button-group" style="display: flex; flex-direction: column; gap: 10px;">
-      <!-- Open Scouting Form -->
       <router-link
         :to="`/form?config=/roboherd-scouting2/assets/config-matches.json&event=${eventKey}&scout=${scoutName}`"
       >
@@ -43,7 +42,7 @@
 import { ref } from "vue";
 
 const eventKey = ref("2026miket");
-const scoutName = ref("Scout 1"); // default so button is always clickable
+const scoutName = ref("Scout 1"); // default value to avoid empty button
 </script>
 
 <style scoped>
