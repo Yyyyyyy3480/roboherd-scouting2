@@ -23,7 +23,7 @@
         :to="{
           path: '/form',
           query: {
-            config: `${import.meta.env.BASE_URL}assets/config-matches.json`,
+            config: configPath,
             event: eventKey,
             scout: scoutName
           }
@@ -51,8 +51,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+// Form input state
 const eventKey = ref("2026miket");
 const scoutName = ref("Scout 1"); // default name
+
+// Fixed: define the config path in script instead of template
+const configPath = `${import.meta.env.BASE_URL}assets/config-matches.json`;
 </script>
 
 <style scoped>
