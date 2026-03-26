@@ -1,29 +1,31 @@
 <template>
-  <div>
-    <div v-if="!config.data || Object.keys(config.data).length === 0">
-      No Configuration Specified
-    </div>
-    <FormTeamSelectionPage ref="pageList" :ref_for="true" v-else-if="!config.data.skipTeamSelection" />
+  <div v-if="!config.data || Object.keys(config.data).length === 0">
+    No Configuration Specified
+  </div>
+
+  <template v-else>
+    <FormTeamSelectionPage ref="pageList" v-if="!config.data.skipTeamSelection" />
     <FormPage
-      ref="pageList"
-      v-for="[i, page] of config.data.pages.entries()"
+      v-for="[i, page] of Object.entries(config.data.pages || [])"
       :key="i"
       :title="page.name"
+      ref="pageList"
     >
       <FormWidget
-        v-for="[j, widget] of page.widgets.entries()"
+        v-for="[j, widget] of Object.entries(page.widgets || [])"
         :key="j"
         :id="`${i}-${j}`"
         :data="widget"
         ref="widgetList"
       />
     </FormPage>
-    <FormDownloadPage ref="pageList" :ref_for="true" />
+    <FormDownloadPage ref="pageList" />
     <FormNavMenu :pages="pageList" />
-  </div>
+  </template>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { ref, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import FormDownloadPage from "./FormDownloadPage.vue";
 import FormNavMenu from "./FormNavMenu.vue";
@@ -31,37 +33,45 @@ import FormPage from "./FormPage.vue";
 import FormTeamSelectionPage from "./FormTeamSelectionPage.vue";
 import FormWidget from "./FormWidget.vue";
 import { useConfigStore, useWidgetsStore, useValidationStore } from "@/common/stores";
-import { watchEffect } from "vue";
 
 const route = useRoute();
 const config = useConfigStore();
 const widgets = useWidgetsStore();
 const validation = useValidationStore();
 
-const pageList = $ref(new Array<InstanceType<typeof FormPage>>());
-const widgetList = $ref(new Array<InstanceType<typeof FormWidget>>());
+const pageList = ref([]);
+const widgetList = ref([]);
 
 // Set config name from query param
-const queryConfig = route.query.config?.toString();
+const queryConfig = route.query.config;
 if (queryConfig) config.name = queryConfig;
 
-// Fetch configuration JSON
-if (config.name) {
-  const fetchResult = await fetch(`${import.meta.env.BASE_URL}assets/config-${config.name}.json`);
+// Fetch JSON config
+async function loadConfig() {
+  if (!config.name) return;
 
-  if (!fetchResult.ok)
-    throw new Error(`JSON configuration fetch failed: HTTP ${fetchResult.status} (${fetchResult.statusText})`);
+  try {
+    const response = await fetch(`${import.meta.env.BASE_URL}assets/config-${config.name}.json`);
 
-  config.data = await fetchResult.json();
+    if (!response.ok) {
+      console.error("Failed to fetch config:", response.status, response.statusText);
+      return;
+    }
 
-  // Validate config data
-  const t = config.validateSchema();
-  if (t.length > 0) throw t;
+    config.data = await response.json();
 
-  // Reset widgets values
-  widgets.values = [];
+    const errors = config.validateSchema();
+    if (errors.length > 0) console.error("Config validation errors:", errors);
+
+    widgets.values = [];
+  } catch (err) {
+    console.error("Error loading config:", err);
+  }
 }
 
+loadConfig();
+
+// Watch for validation triggers
 watchEffect(() => {
   if (validation.triggerPages.length === 0) return;
 
@@ -69,7 +79,7 @@ watchEffect(() => {
 
   for (const i of validation.triggerPages) {
     const index = i - (config.data.skipTeamSelection ? 0 : 1);
-    const failed = widgetList
+    const failed = widgetList.value
       .filter(e => e.id.startsWith(index.toString()))
       .map(e => e.validate())
       .includes(false);
