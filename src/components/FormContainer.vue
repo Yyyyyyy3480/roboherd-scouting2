@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import FormDownloadPage from "./FormDownloadPage.vue";
 import FormNavMenu from "./FormNavMenu.vue";
 import FormPage from "./FormPage.vue";
@@ -34,8 +35,10 @@ const validation = useValidationStore();
 const pageList = $ref(new Array<InstanceType<typeof FormPage>>());
 const widgetList = $ref(new Array<InstanceType<typeof FormWidget>>());
 
-// Fixed: define the config URL separately
-const configUrl = `${import.meta.env.BASE_URL}assets/config-matches.json`;
+// ✅ Read config query parameter
+const route = useRoute();
+const configFile = route.query.config ?? "assets/config-matches.json";
+const configUrl = `${import.meta.env.BASE_URL}${configFile}`;
 
 // Fetch the configuration file
 const fetchResult = await fetch(configUrl);
@@ -54,10 +57,8 @@ widgets.values = [];
 watchEffect(() => {
   if (validation.triggerPages.length == 0) return;
 
-  // Assume all pages pass validation
   validation.failedPage = -1;
 
-  // Iterate through the pages that need validation
   for (const i of validation.triggerPages) {
     const index = i - (config.data.skipTeamSelection ? 0 : 1);
     const failed = widgetList
@@ -65,13 +66,11 @@ watchEffect(() => {
       .map(e => e.validate())
       .includes(false);
     if (failed) {
-      // Keep track of the first failed page
       validation.failedPage = i;
       break;
     }
   }
 
-  // Unset the triggered pages (also indicates validation is complete)
   validation.triggerPages = [];
 });
 </script>
