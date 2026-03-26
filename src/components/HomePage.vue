@@ -23,7 +23,7 @@
         :to="{
           path: '/form',
           query: {
-            config: 'assets/config-matches.json',  <!-- ✅ Hash mode safe path -->
+            config: 'assets/config-matches.json',  // ✅ Hash mode safe path
             event: eventKey,
             scout: scoutName
           }
