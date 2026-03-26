@@ -1,20 +1,24 @@
 <template>
-  <FormTeamSelectionPage ref="pageList" :ref_for="true" v-if="!config.data.skipTeamSelection" />
-  <FormPage
-    ref="pageList"
-    v-for="[i, page] of config.data.pages.entries()"
-    :key="i"
-    :title="page.name"
-  >
-    <FormWidget
-      v-for="[j, widget] of page.widgets.entries()"
-      :key="j"
-      :id="`${i}-${j}`"
-      :data="widget"
-      ref="widgetList"
-    />
-  </FormPage>
-  <FormDownloadPage ref="pageList" :ref_for="true" />
+  <!-- Team selection page -->
+  <FormTeamSelectionPage v-if="!config.data.skipTeamSelection" ref="teamSelectionPage" />
+
+  <!-- Loop through pages -->
+  <template v-for="(page, i) in config.data.pages" :key="i">
+    <FormPage :title="page.name" :ref="el => pageList[i] = el">
+      <FormWidget
+        v-for="(widget, j) in page.widgets"
+        :key="j"
+        :id="`${i}-${j}`"
+        :data="widget"
+        :ref="el => widgetList.push(el)"
+      />
+    </FormPage>
+  </template>
+
+  <!-- Download page -->
+  <FormDownloadPage ref="downloadPage" />
+
+  <!-- Navigation menu -->
   <FormNavMenu :pages="pageList" />
 </template>
 
@@ -32,31 +36,29 @@ const config = useConfigStore();
 const widgets = useWidgetsStore();
 const validation = useValidationStore();
 
-const pageList = $ref(new Array<InstanceType<typeof FormPage>>());
-const widgetList = $ref(new Array<InstanceType<typeof FormWidget>>());
+const pageList = $ref<Array<InstanceType<typeof FormPage>>>([]);
+const widgetList = $ref<Array<InstanceType<typeof FormWidget>>>([]);
 
-// ✅ Read config query parameter
 const route = useRoute();
-const configFile = route.query.config ?? "assets/config-matches.json";
+const configFile = route.query.config as string ?? "assets/config-matches.json";
 const configUrl = `${import.meta.env.BASE_URL}${configFile}`;
 
-// Fetch the configuration file
 const fetchResult = await fetch(configUrl);
-if (!fetchResult.ok)
+if (!fetchResult.ok) {
   throw new Error(`JSON configuration fetch failed: HTTP ${fetchResult.status} (${fetchResult.statusText})`);
+}
 
 config.data = await fetchResult.json();
 
-// Validate config data against JSON schema
+// Validate config against schema
 const t = config.validateSchema();
 if (t.length > 0) throw t;
 
-// Reset widget values array
+// Reset widget values
 widgets.values = [];
 
 watchEffect(() => {
-  if (validation.triggerPages.length == 0) return;
-
+  if (validation.triggerPages.length === 0) return;
   validation.failedPage = -1;
 
   for (const i of validation.triggerPages) {
