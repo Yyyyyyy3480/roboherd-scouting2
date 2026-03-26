@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import { ref, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 import FormDownloadPage from "./FormDownloadPage.vue";
 import FormNavMenu from "./FormNavMenu.vue";
 import FormPage from "./FormPage.vue";
@@ -30,6 +31,7 @@ import FormTeamSelectionPage from "./FormTeamSelectionPage.vue";
 import FormWidget from "./FormWidget.vue";
 import { useConfigStore, useWidgetsStore, useValidationStore } from "@/common/stores";
 
+const route = useRoute();
 const config = useConfigStore();
 const widgets = useWidgetsStore();
 const validation = useValidationStore();
@@ -37,10 +39,12 @@ const validation = useValidationStore();
 const pageList = ref<Array<InstanceType<typeof FormPage>>>([]);
 const widgetList = ref<Array<InstanceType<typeof FormWidget>>>([]);
 
-// ✅ Fetch the JSON configuration
+// ✅ Use the config query param or fallback
+const configUrl = route.query.config || "assets/config-matches.json";
+
 const fetchConfig = async () => {
   try {
-    const url = `${import.meta.env.BASE_URL}assets/config-matches.json`;
+    const url = `${import.meta.env.BASE_URL}${configUrl}`;
     const res = await fetch(url);
 
     if (!res.ok) {
@@ -58,13 +62,12 @@ const fetchConfig = async () => {
 
   } catch (err) {
     console.error("Error loading config:", err);
-    config.data = { pages: [] }; // fallback to empty
+    config.data = { pages: [] }; // fallback
   }
 };
 
 await fetchConfig();
 
-// ✅ Watch for validation triggers
 watchEffect(() => {
   if (validation.triggerPages.length === 0) return;
 
