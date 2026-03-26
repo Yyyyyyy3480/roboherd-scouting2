@@ -1,89 +1,45 @@
 <template>
-  <FormTeamSelectionPage
-    ref="pageList"
-    v-if="!config.data.skipTeamSelection"
-  />
-  <FormPage
-    v-for="[i, page] of config.data.pages.entries()"
-    :key="i"
-    :title="page.name"
-    ref="pageList"
-  >
-    <FormWidget
-      v-for="[j, widget] of page.widgets.entries()"
-      :key="j"
-      :id="`${i}-${j}`"
-      :data="widget"
-      ref="widgetList"
-    />
+  <FormTeamSelectionPage ref="pageList" :ref_for="true" v-if="!config.data.skipTeamSelection" />
+  <FormPage v-for="[i, page] of config.data.pages?.entries()" :key="i" ref="pageList" :title="page.name">
+    <FormWidget v-for="[j, widget] of page.widgets?.entries()" :key="j" :id="`${i}-${j}`" :data="widget" ref="widgetList" />
   </FormPage>
-  <FormDownloadPage ref="pageList" />
+  <FormDownloadPage ref="pageList" :ref_for="true" />
   <FormNavMenu :pages="pageList" />
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
-import { useRoute } from "vue-router";
 import FormDownloadPage from "./FormDownloadPage.vue";
 import FormNavMenu from "./FormNavMenu.vue";
 import FormPage from "./FormPage.vue";
 import FormTeamSelectionPage from "./FormTeamSelectionPage.vue";
 import FormWidget from "./FormWidget.vue";
 import { useConfigStore, useWidgetsStore, useValidationStore } from "@/common/stores";
+import { watchEffect } from "vue";
 
-const route = useRoute();
 const config = useConfigStore();
 const widgets = useWidgetsStore();
 const validation = useValidationStore();
 
-const pageList = ref<Array<InstanceType<typeof FormPage>>>([]);
-const widgetList = ref<Array<InstanceType<typeof FormWidget>>>([]);
+const pageList = $ref(new Array<InstanceType<typeof FormPage>>());
+const widgetList = $ref(new Array<InstanceType<typeof FormWidget>>());
 
-// ✅ Use the config query param or fallback
-const configUrl = route.query.config || "assets/config-matches.json";
+const fetchResult = await fetch(`${import.meta.env.BASE_URL}assets/config-${config.name}.json`);
+if (!fetchResult.ok) throw new Error(`JSON configuration fetch failed: HTTP ${fetchResult.status}`);
+config.data = await fetchResult.json();
 
-const fetchConfig = async () => {
-  try {
-    const url = `${import.meta.env.BASE_URL}${configUrl}`;
-    const res = await fetch(url);
+const errors = config.validateSchema();
+if (errors.length) throw errors;
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch config: ${res.status} ${res.statusText}`);
-    }
-
-    config.data = await res.json();
-
-    // Validate config against schema
-    const schemaErrors = config.validateSchema();
-    if (schemaErrors.length > 0) throw schemaErrors;
-
-    // Reset widget values
-    widgets.values = [];
-
-  } catch (err) {
-    console.error("Error loading config:", err);
-    config.data = { pages: [] }; // fallback
-  }
-};
-
-await fetchConfig();
+widgets.values = [];
 
 watchEffect(() => {
-  if (validation.triggerPages.length === 0) return;
-
+  if (!validation.triggerPages.length) return;
   validation.failedPage = -1;
 
   for (const i of validation.triggerPages) {
     const index = i - (config.data.skipTeamSelection ? 0 : 1);
-    const failed = widgetList.value
-      .filter((e) => e.id.startsWith(index.toString()))
-      .map((e) => e.validate())
-      .includes(false);
-
-    if (failed) {
-      validation.failedPage = i;
-      break;
-    }
+    const failed = widgetList.filter(e => e.id.startsWith(index.toString())).map(e => e.validate()).includes(false);
+    if (failed) { validation.failedPage = i; break; }
   }
 
   validation.triggerPages = [];
