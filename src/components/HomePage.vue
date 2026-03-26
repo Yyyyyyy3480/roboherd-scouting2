@@ -23,7 +23,7 @@
         :to="{
           path: '/form',
           query: {
-            config: '/roboherd-scouting2/assets/config-matches.json', // ⚡ path stays as-is
+            config: `${import.meta.env.BASE_URL}assets/config-matches.json`,
             event: eventKey,
             scout: scoutName
           }
