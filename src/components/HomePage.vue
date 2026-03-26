@@ -23,7 +23,7 @@
         :to="{
           path: '/form',
           query: {
-            config: 'matches',  // ⚡ Only the config name, not full path
+            config: 'matches',      // ✅ Just the base name of your config JSON
             event: eventKey,
             scout: scoutName
           }
@@ -51,8 +51,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const eventKey = ref("2026miket");
-const scoutName = ref("Scout 1"); // default name
+const eventKey = ref("2026miket"); // Default event key
+const scoutName = ref("Scout 1");  // Default scout name
 </script>
 
 <style scoped>
