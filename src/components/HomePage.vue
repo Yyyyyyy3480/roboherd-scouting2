@@ -2,7 +2,6 @@
   <div class="home-page" style="max-width: 600px; margin: 0 auto; padding: 20px;">
     <h1>Roboherd Scouting</h1>
 
-    <!-- Event and Scout Inputs -->
     <div style="margin-bottom: 20px;">
       <label>
         Event Key:
@@ -15,15 +14,13 @@
       </label>
     </div>
 
-    <!-- Navigation Buttons -->
     <div class="button-group" style="display: flex; flex-direction: column; gap: 10px;">
-
       <!-- Open Scouting Form -->
       <router-link
         :to="{
           path: '/form',
           query: {
-            config: configPath,
+            config: 'assets/config-matches.json',  <!-- ✅ remove leading slash -->
             event: eventKey,
             scout: scoutName
           }
@@ -32,18 +29,9 @@
         <button>Open Scouting Form</button>
       </router-link>
 
-      <router-link to="/inspector">
-        <button>Inspector View</button>
-      </router-link>
-
-      <router-link to="/tps-exporter">
-        <button>TPS Exporter</button>
-      </router-link>
-
-      <router-link to="/picklist">
-        <button>Alliance Picklist</button>
-      </router-link>
-
+      <router-link to="/inspector"><button>Inspector View</button></router-link>
+      <router-link to="/tps-exporter"><button>TPS Exporter</button></router-link>
+      <router-link to="/picklist"><button>Alliance Picklist</button></router-link>
     </div>
   </div>
 </template>
@@ -51,41 +39,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-// Form input state
 const eventKey = ref("2026miket");
-const scoutName = ref("Scout 1"); // default name
-
-// Fixed: define the config path in script instead of template
-const configPath = `${import.meta.env.BASE_URL}assets/config-matches.json`;
+const scoutName = ref("Scout 1");
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  margin-bottom: 30px;
-}
-
-input[type="text"] {
-  margin-left: 10px;
-  padding: 5px 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  width: 200px;
-}
-
-button {
-  padding: 10px;
-  background-color: #292929;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #444;
-}
+h1 { text-align: center; font-family: Arial, sans-serif; margin-bottom: 30px; }
+input[type="text"] { margin-left: 10px; padding: 5px 8px; border-radius: 4px; border: 1px solid #ccc; width: 200px; }
+button { padding: 10px; background-color: #292929; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
+button:hover { background-color: #444; }
+</style>
 </style>
