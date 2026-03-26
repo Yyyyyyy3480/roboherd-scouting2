@@ -11,6 +11,7 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/roboherd-scouting2/", // ✅ ensures proper GitHub Pages deployment under repo subfolder
   css: {
     postcss: {
       plugins: [autoprefixer, postcssPresetEnv({ stage: 1 })]
